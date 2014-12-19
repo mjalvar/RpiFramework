@@ -42,14 +42,13 @@ class Controls:
 	def __init__(self,config):
 
 		self.config = config
-		self.mirror = config.get('MIRROR_IP')
 
 		# Commands
 		self.execute['list'] = self.list							# list supported commands
 		self.execute['status'] = self.get_status					# send status
 		self.execute['restart_machine'] = self.restart				# restart machine
 		self.execute['poweroff_machine'] = self.poweroff			# 
-		self.execute['update'] = self.update						# download files from mirror 
+		self.execute['update'] = self.update						# download files from github
 
 		if( config.enable('CAMERA') ) : 
 			self.execute['photo'] = self.photo						# take a photo
@@ -192,15 +191,6 @@ class Controls:
 		logging.info('Updating...')
 		git = 'cd ' + Config.FRAMEWORK_PATH + ' && git pull'
 		self.system(git)
-		# deb_file = '/tmp/RaspiFramework.deb'
-		# logging.info('Updating from: %s'%self.mirror)
-		# wget = 'wget http://'+self.mirror+'/raspi/RaspiFramework.deb -O '+deb_file
-		# if os.path.exists(deb_file):
-		# 	os.remove(deb_file)
-		# self.system(wget)
-		# #fileinfo = os.stat(deb_file)
-		# #logging.info('File size: '+fileinfo.st_size)
-		# self.system('dpkg -i /tmp/RaspiFramework.deb')
 		logging.info('Update done')
 
 
