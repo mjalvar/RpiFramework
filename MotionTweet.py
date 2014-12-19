@@ -52,7 +52,7 @@ class MotionTweet:
 				self.controls.photo()
 				# self.controls.photo_wm()
 				tweet = Tweet(image=True)
-				self.sleep(Config.TWEET_SLEEP)
+				self.sleep(self.config.get('TWEET_SLEEP'))
 				# self.controls.pos_ventana()					
 				self.controls.display('motion ready')
 
