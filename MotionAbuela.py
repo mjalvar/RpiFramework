@@ -48,20 +48,20 @@ class MotionAbuela:
 
 	def alarm(self):
 		config = self.config
-		self.controls.photo()
 
 		Cmd = Config.FRAMEWORK_PATH + '/run_client.py ' + config.get('ABUELA_BEEP_HOST') + ' ' + str(config.get('ABUELA_BEEP_PORT')) + ' ' + 'beep'
 		logging.info( 'Beep Cmd: ' + Cmd )
 		os.system(Cmd)
 
+		self.controls.photo()
 
 		Cmd = 'echo "'+self.config.get('SERVER_NAME')+' Abuela" | mail -a "' + '/var/www/foto.jpg' + '" -s "Raspi Abuela E' + str(self.Cnt) + '" ' + self.config.get('ABUELA_EMAILS')
 		if self.config.enable('ABUELA_SEND_EMAIL'):
 			logging.info(Cmd)
 			os.system(Cmd)
+			logging.info( 'Correo enviado...' )
 
 		self.Cnt = self.Cnt + 1
-		logging.info( 'Correo enviado...' )
 
 	
 
