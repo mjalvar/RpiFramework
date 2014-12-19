@@ -189,16 +189,19 @@ class Controls:
 			self.system('aplay '+ Config.FRAMEWORK_PATH +'/beep.wav')
 
 	def update(self,args):
-		deb_file = '/tmp/RaspiFramework.deb'
-		logging.info('Updating from: %s'%self.mirror)
-		wget = 'wget http://'+self.mirror+'/raspi/RaspiFramework.deb -O '+deb_file
-		if os.path.exists(deb_file):
-			os.remove(deb_file)
-		self.system(wget)
-		#fileinfo = os.stat(deb_file)
-		#logging.info('File size: '+fileinfo.st_size)
-		self.system('dpkg -i /tmp/RaspiFramework.deb')
-		logging.info('Updating done')
+		logging.info('Updating...')
+		git = 'cd ' + Config.FRAMEWORK_PATH + ' && git pull'
+		self.system(git)
+		# deb_file = '/tmp/RaspiFramework.deb'
+		# logging.info('Updating from: %s'%self.mirror)
+		# wget = 'wget http://'+self.mirror+'/raspi/RaspiFramework.deb -O '+deb_file
+		# if os.path.exists(deb_file):
+		# 	os.remove(deb_file)
+		# self.system(wget)
+		# #fileinfo = os.stat(deb_file)
+		# #logging.info('File size: '+fileinfo.st_size)
+		# self.system('dpkg -i /tmp/RaspiFramework.deb')
+		logging.info('Update done')
 
 
 	# =======================================
@@ -217,7 +220,7 @@ class Controls:
 		
 	def start_motion_tweet(self,args=''):
 		if( self.grab('camera') and self.grab('motion_tweet') ):
-			self.motion_tweet = MotionTweet(camera=self.Camera,controls=self)
+			self.motion_tweet = MotionTweet(camera=self.Camera,config=self.config,controls=self)
 			self.motion_tweet.run()
 
 	def stop_motion_tweet(self,args=''):
@@ -232,7 +235,7 @@ class Controls:
 	# Motion Alarm
 	def start_motion_alarm(self,args=''):
 		if( self.grab('camera') and self.grab('motion_alarm') ):
-			self.motion_alarm = MotionAlarm(camera=self.Camera,controls=self)
+			self.motion_alarm = MotionAlarm(camera=self.Camera,config=self.config,controls=self)
 			self.motion_alarm.run()
 
 	def stop_motion_alarm(self,args=''):

@@ -14,17 +14,18 @@ from Stream import Stream
 
 class MotionAlarm:
 
-	def __init__(self,camera,controls=None):
+	def __init__(self,camera,config,controls=None):
 		self.event = threading.Event()
-		self.sensor = PIR(pin=Config.PIN_PIR)
+		self.sensor = PIR(pin=config.get('PIN_PIR'))
 		self.is_running = True
 		# self.stream = Stream(camera)
 		self.camera = camera
 		self.controls = controls
+		self.config = config
 		self.Cnt = 1
 
-		espeak_cmd = 'espeak -ves+m2 -f '+Config.FRAMEWORK_ROOT+'/alarm_on.txt --stdout | aplay'
-		if Config.ALARM_ESPEAK:
+		espeak_cmd = 'espeak -ves+m2 -f '+Config.FRAMEWORK_PATH+'/alarm_on.txt --stdout | aplay'
+		if config.enable('ALARM_ESPEAK'):
 			os.system(espeak_cmd)
 		self.controls.system('aplay /home/pi/framework/alarm_on.wav')		
 
@@ -39,8 +40,8 @@ class MotionAlarm:
 		del(self.sensor)
 		# del(self.stream)
 		self.event.set()
-		espeak_cmd = 'espeak -ves+m2 -f '+Config.FRAMEWORK_ROOT+'/alarm_off.txt --stdout | aplay'
-		if Config.ALARM_ESPEAK:
+		espeak_cmd = 'espeak -ves+m2 -f '+Config.FRAMEWORK_PATH+'/alarm_off.txt --stdout | aplay'
+		if self.config.enable('ALARM_ESPEAK'):
 			os.system(espeak_cmd)		
 		self.controls.system('aplay /home/pi/framework/alarm_on.wav')	
 		self.sleep(5)			
@@ -55,8 +56,8 @@ class MotionAlarm:
 		# self.stream.capture('/tmp/foto_tmp.jpg')
 		self.controls.photo()
 
-		Cmd = 'echo "'+Config.SERVER_NAME+' Alarma" | mail -a "' + '/var/www/foto.jpg' + '" -s "Raspi Alarma E' + str(self.Cnt) + '" ' + Config.ALARM_EMAILS
-		if Config.ALARM_SEND_EMAIL:
+		Cmd = 'echo "'+self.config.get('SERVER_NAME')+' Alarma" | mail -a "' + '/var/www/foto.jpg' + '" -s "Raspi Alarma E' + str(self.Cnt) + '" ' + self.config.get('ALARM_EMAILS')
+		if self.config.enable('ALARM_SEND_EMAIL'):
 			logging.info(Cmd)
 			os.system(Cmd)
 
@@ -77,8 +78,8 @@ class MotionAlarm:
 				# t.start()	
 				self.alarm()
 
-				espeak_cmd = 'espeak -ves+m2 -f '+Config.FRAMEWORK_ROOT+'/alarm.txt --stdout | aplay'
-				if Config.ALARM_ESPEAK:
+				espeak_cmd = 'espeak -ves+m2 -f '+Config.FRAMEWORK_PATH+'/alarm.txt --stdout | aplay'
+				if self.config.enable('ALARM_ESPEAK'):
 					os.system(espeak_cmd)
 
 				for x in xrange(10):

@@ -103,7 +103,7 @@ class Server:
 
 		# Actions before stop
 		self.cmd.stop()
-		if( rpi_device ) : 
+		if( Config.IS_RPI ) : 
 			GPIO.cleanup()			
 
 
@@ -121,7 +121,7 @@ class Server:
 
 		if( req == 'restart' ):
 			self.is_running = False
-			if( rpi_device ) : GPIO.cleanup()	
+			if( Config.IS_RPI ) : GPIO.cleanup()	
 			return 'Restarting'
 		else:
 			if( req=='status' or req=='list' ): rsp = self.cmd.run(req,wait=True)

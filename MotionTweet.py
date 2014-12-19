@@ -13,13 +13,14 @@ from Stream import Stream
 
 class MotionTweet:
 
-	def __init__(self,camera,controls=None):
+	def __init__(self,camera,config,controls=None):
 		self.event = threading.Event()
-		self.sensor = PIR(pin=Config.PIN_PIR)
+		self.sensor = PIR(pin=config.get('PIN_PIR'))
 		self.is_running = True
 		# self.stream = Stream(camera)
 		self.camera = camera
 		self.controls = controls
+		self.config = config
 
 	def __del__(self):
 		logging.info( 'MotionTweet stopped' )
