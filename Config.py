@@ -17,7 +17,7 @@ class Config:
 	# IS_RPI = False
 
 	if( DEBUG ):
-		FRAMEWORK_PATH = '/home/mjalvar/Projects/RaspiFramework/home/pi/framework'
+		FRAMEWORK_PATH = '/home/mjalvar/Projects/RaspberryPi/framework'
 	else:
 		FRAMEWORK_PATH = '/home/pi/framework'
 

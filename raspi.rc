@@ -5,7 +5,6 @@ SERVER_PORT = 2626
 SERVER_NAME = Raspi
 SERVER_LOG = /tmp/server.log
 
-MIRROR_IP = 192.168.0.100
 PHOTO_W = 1200
 PHOTO_H = 800
 VIDEO_W = 400
@@ -18,12 +17,16 @@ SOUND = True
 RELAY = True
 SERVO = False
 
+# Tweet Motion
 TWEET_SLEEP = 1800
+TWEET_SEND_BEEP = False
+TWEET_HOST_BEEP = 192.168.0.110
 
 # Alarm
 ALARM_EMAILS = melvin.alvarado@gmail.com,stephanie.alvarado@gmail.com,marcela.rodriguez.soto@gmail.com
 ALARM_SEND_EMAIL = True
 ALARM_ESPEAK = True
+
 
 # Board Pins
 PIN_PIR = 17
