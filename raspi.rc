@@ -17,10 +17,17 @@ SOUND = True
 RELAY = True
 SERVO = False
 
+
+# Abuela Motion
+ABUELA = False
+ABUELA_SEND_EMAIL = False
+ABUELA_EMAILS = melvin.alvarado@gmail.com,stephanie.alvarado@gmail.com,marcela.rodriguez.soto@gmail.com
+ABUELA_BEEP_HOST = 192.168.0.110
+ABUELA_BEEP_PORT = 2626
+
+
 # Tweet Motion
 TWEET_SLEEP = 1800
-TWEET_SEND_BEEP = False
-TWEET_HOST_BEEP = 192.168.0.110
 
 # Alarm
 ALARM_EMAILS = melvin.alvarado@gmail.com,stephanie.alvarado@gmail.com,marcela.rodriguez.soto@gmail.com

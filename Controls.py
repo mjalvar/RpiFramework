@@ -225,7 +225,10 @@ class Controls:
 	# Motion Alarm
 	def start_motion_alarm(self,args=''):
 		if( self.grab('camera') and self.grab('motion_alarm') ):
-			self.motion_alarm = MotionAlarm(camera=self.Camera,config=self.config,controls=self)
+			if self.config.enable('ABUELA'):
+				self.motion_alarm = MotionAlarm(camera=self.Camera,config=self.config,controls=self)
+			else
+				self.motion_alarm = MotionAbuela(camera=self.Camera,config=self.config,controls=self)
 			self.motion_alarm.run()
 
 	def stop_motion_alarm(self,args=''):
