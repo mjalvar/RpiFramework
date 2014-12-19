@@ -268,8 +268,8 @@ class Controls:
 
 
 	def photo_wm(self, args='',file_photo='/tmp/foto_tmp.jpg'):
-		w = Config.PHOTO_W
-		h = Config.PHOTO_H
+		w = self.config.get('PHOTO_W')
+		h = self.config.get('PHOTO_H')
 		w_str = str(w)
 		h_str = str(h)
 
