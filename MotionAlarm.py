@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # melvin.alvarado   
 
-import Config
 import time
 import threading
 import logging
@@ -10,6 +9,7 @@ import os
 
 from PIR import PIR
 from Stream import Stream
+from Config import Config
 
 
 class MotionAlarm:

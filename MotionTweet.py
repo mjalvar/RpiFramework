@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # melvin.alvarado   
 
-import Config
 import time
 import threading
 import logging
@@ -9,6 +8,7 @@ import logging
 from Tweet import Tweet
 from PIR import PIR
 from Stream import Stream
+from Config import Config
 
 
 class MotionTweet:
