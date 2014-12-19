@@ -51,7 +51,7 @@ class MotionAbuela:
 		self.controls.photo()
 
 		Cmd = Config.FRAMEWORK_PATH + '/run_client.py ' + config.get('ABUELA_BEEP_HOST') + ' ' + str(config.get('ABUELA_BEEP_PORT')) + ' ' + 'beep'
-		logging.info( 'Beep Cmd:',Cmd )
+		logging.info( 'Beep Cmd: ' + Cmd )
 		os.system(Cmd)
 
 
