@@ -1,0 +1,31 @@
+# melvin.alvarado
+# default config
+
+SERVER_PORT = 2626
+SERVER_NAME = Raspi
+SERVER_LOG = /tmp/server.log
+
+MIRROR_IP = 192.168.0.100
+PHOTO_W = 1200
+PHOTO_H = 800
+VIDEO_W = 400
+VIDEO_H = 300
+
+CAMERA = True
+DISPLAY = False
+MOTION = True
+SOUND = True
+RELAY = True
+SERVO = False
+
+TWEET_SLEEP = 1800
+
+# Alarm
+ALARM_EMAILS = melvin.alvarado@gmail.com,stephanie.alvarado@gmail.com,marcela.rodriguez.soto@gmail.com
+ALARM_SEND_EMAIL = True
+ALARM_ESPEAK = True
+
+# Board Pins
+PIN_PIR = 17
+
+
