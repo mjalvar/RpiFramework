@@ -21,7 +21,6 @@ if( Config.IS_RPI ):
 		from Tweet import Tweet
 		from Servo import Servo
 		from Stream import Stream		
-		rpi_device = True	
 	except ImportError:
 		logging.error("ERROR: Not a RPi device")	
 
@@ -76,7 +75,7 @@ class Controls:
 		self.sem = threading.BoundedSemaphore(value=1)
 		if( Config.IS_RPI  and config.enable('CAMERA') ): 
 			self.Camera = picamera.PiCamera()
-			self.Stream = Stream(self.Camera)
+			self.Stream = Stream(self.Camera,self.config)
 			self.Stream.run()			
 		else: 
 			self.Camera = None
