@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # melvin.alvarado     
 
-import Config
 import subprocess
 import socket
 import time
@@ -9,22 +8,26 @@ import threading
 
 import logging
 
-try:
-	import picamera
-	rpi_device = True
-except ImportError:
-	rpi_device = False
+from Config import Config
+
+if( Config.IS_RPI ):
+	try: 
+		import picamera
+	except ImportError:	
+		logging.error("ERROR: Not a RPi device")		
+
 
 class Stream:
 
-	def __init__(self,camera):
+	def __init__(self,camera,config):
 		self.main_cmd = "sudo -u pi python /home/pi/framework/Stream.py"
 		self.event = threading.Event()		
 		self.camera = camera
+		self.config = config
 
 
 	def run(self):
-		if( rpi_device ):
+		if( Config.IS_RPI ):
 			self.event.clear()
 			self.system(self.main_cmd,wait=False)		
 			time.sleep(3)
@@ -40,9 +43,9 @@ class Stream:
 
 
 	def capture(self,capture_file='/tmp/foto.jpg'):
-		if( rpi_device ):
+		if( Config.IS_RPI ):
 			logging.info('Capturing photo')			
-			self.camera.capture(capture_file,resize=(Config.PHOTO_W,Config.PHOTO_H),use_video_port=True)
+			self.camera.capture(capture_file,resize=(self.config.get('PHOTO_W'),self.config.get('PHOTO_H')),use_video_port=True)
 
 
 	def cvlc(self):
@@ -60,7 +63,7 @@ class Stream:
 			time.sleep(2)
 			# Start recording, sending the output to the connection for 60
 			# seconds, then stop
-			camera.start_recording(connection, format='h264',resize=(Config.VIDEO_W, Config.VIDEO_H))
+			camera.start_recording(connection, format='h264',resize=(self.config.get('VIDEO_W'), self.config.get('VIDEO_H')))
 			#camera.wait_recording(5)
 			self.event.wait()
 			camera.stop_recording()

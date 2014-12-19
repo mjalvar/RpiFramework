@@ -14,6 +14,7 @@ from Config import Config
 from Controls import Controls
 from Tweet import Tweet
 
+
 if( Config.IS_RPI ):
 	try: 
 		import RPi.GPIO as GPIO
@@ -36,7 +37,7 @@ class Server:
 
 		if( Config.DEBUG ):
 			self.config = Config(
-				config_file = '/home/mjalvar/Projects/RaspiFramework/home/pi/framework/raspi.rc',
+				config_file = Config.FRAMEWORK_PATH + '/raspi.rc',
 				user_file = '/home/mjalvar/.raspi.rc'
 			)
 		else:
