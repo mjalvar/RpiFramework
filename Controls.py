@@ -227,7 +227,7 @@ class Controls:
 		if( self.grab('camera') and self.grab('motion_alarm') ):
 			if self.config.enable('ABUELA'):
 				self.motion_alarm = MotionAlarm(camera=self.Camera,config=self.config,controls=self)
-			else
+			else:
 				self.motion_alarm = MotionAbuela(camera=self.Camera,config=self.config,controls=self)
 			self.motion_alarm.run()
 
