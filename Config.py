@@ -11,8 +11,10 @@ import re
 
 class Config:
 
-	DEBUG = True
-	IS_RPI = False
+	DEBUG = False
+	IS_RPI = True
+	# DEBUG = True
+	# IS_RPI = False
 
 	if( DEBUG ):
 		FRAMEWORK_PATH = '/home/mjalvar/Projects/RaspiFramework/home/pi/framework'
