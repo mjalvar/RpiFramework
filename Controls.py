@@ -17,6 +17,7 @@ if( Config.IS_RPI ):
 		import picamera
 		from MotionTweet import MotionTweet
 		from MotionAlarm import MotionAlarm
+		from MotionAbuela import MotionAbuela
 		from Relay import Relay
 		from Tweet import Tweet
 		from Servo import Servo
