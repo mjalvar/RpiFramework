@@ -2,6 +2,7 @@
 # default config
 
 SERVER_PORT = 2626
+VLC_PORT = 8080
 SERVER_NAME = Raspi
 SERVER_LOG = /tmp/server.log
 

@@ -88,6 +88,18 @@ class Stream:
 		#self.kill('vlc')
 
 if __name__ == '__main__':
-	vlc_stream = "nc -l 9000 | sudo -u pi cvlc stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8080}' :demux=h264 2> /dev/null"
+
+	if( Config.DEBUG ):
+		config = Config(
+			config_file = Config.FRAMEWORK_PATH + '/raspi.rc',
+			user_file = '/home/mjalvar/.raspi.rc'
+		)
+	else:
+		config = Config(
+			config_file = '/home/pi/framework/raspi.rc',
+			user_file = '/home/pi/.raspi.rc'
+		)	
+
+	vlc_stream = "nc -l 9000 | sudo -u pi cvlc stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:"+config.get('VLC_PORT')+"}' :demux=h264 2> /dev/null"
 	p = subprocess.Popen(vlc_stream, stdout=subprocess.PIPE, shell=True)
 	#(output, err) = p.communicate()
