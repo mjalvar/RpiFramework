@@ -78,7 +78,7 @@ class MotionAbuela:
 				# periodos
 				now = datetime.datetime.now()
 				logging.info( 'hora es: ' + str(now.hour) )
-				if (now.hour>14 and now.hour<18) or now.hour>20 or now.hour<9 :
+				if (now.hour>=14 and now.hour<18) or now.hour>=20 or now.hour<=9 :
 					self.alarm()
 
 				self.sleep(5)
