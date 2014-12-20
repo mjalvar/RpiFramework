@@ -100,6 +100,6 @@ if __name__ == '__main__':
 			user_file = '/home/pi/.raspi.rc'
 		)	
 
-	vlc_stream = "nc -l 9000 | sudo -u pi cvlc stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:"+config.get('VLC_PORT')+"}' :demux=h264 2> /dev/null"
+	vlc_stream = "nc -l 9000 | sudo -u pi cvlc stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:"+str(config.get('VLC_PORT'))+"}' :demux=h264 2> /dev/null"
 	p = subprocess.Popen(vlc_stream, stdout=subprocess.PIPE, shell=True)
 	#(output, err) = p.communicate()
