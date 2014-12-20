@@ -4,6 +4,7 @@
 import time
 import threading
 import logging
+import datetime
 
 import os
 
@@ -53,7 +54,8 @@ class MotionAbuela:
 		logging.info( 'Beep Cmd: ' + Cmd )
 		os.system(Cmd)
 
-		self.controls.photo()
+		#self.controls.photo()
+		self.controls.tweet()
 
 		Cmd = 'echo "'+self.config.get('SERVER_NAME')+' Abuela" | mail -a "' + '/var/www/foto.jpg' + '" -s "Raspi Abuela E' + str(self.Cnt) + '" ' + self.config.get('ABUELA_EMAILS')
 		if self.config.enable('ABUELA_SEND_EMAIL'):
@@ -73,7 +75,11 @@ class MotionAbuela:
 			self.controls.display('motion detected')
 			if(self.is_running):
 
-				self.alarm()
+				# periodos
+				now = datetime.datetime.now()
+				logging.info( 'hora es: ' + str(now.hour) )
+				if (now.hour>14 and now.hour<18) or now.hour>20 or now.hour<9 :
+					self.alarm()
 
 				self.sleep(5)
 				self.controls.display('motion ready')
